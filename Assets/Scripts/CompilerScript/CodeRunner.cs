@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 
 public class CodeRunner : MonoBehaviour
 {
+
     [Header("UI Elements")]
     public TMP_InputField codeInputField;
     public TMP_Text outputText;
@@ -14,12 +15,63 @@ public class CodeRunner : MonoBehaviour
     public string clientId = "your_client_id";
     public string clientSecret = "your_client_secret";
 
+    [Header("Puzzle Data")]
+    public List<CodePuzzle> codePuzzles;
+    private int currentPuzzleIndex = 0;
+
     private string jdoodleEndpoint = "https://api.jdoodle.com/v1/execute";
 
     public void OnRunCodeClicked()
     {
         string userCode = codeInputField.text;
-        StartCoroutine(RunCode(userCode));
+        string wrappedCode = WrapCodeIfNeeded(userCode); // Wrap user input in a class
+        StartCoroutine(RunCode(wrappedCode));
+    }
+    public void SetPuzzle(int index)
+    {
+        if (index >= 0 && index < codePuzzles.Count)
+        {
+            currentPuzzleIndex = index;
+            codeInputField.text = codePuzzles[index].codeWithBug;
+        }
+        else
+        {
+            Debug.LogWarning("Invalid puzzle index");
+        }
+    }
+    private string WrapCodeIfNeeded(string userCode)
+    {
+        bool hasMain = userCode.Contains("Main(");
+        bool hasClass = userCode.Contains("class");
+        bool isFull = hasMain || hasClass;
+
+        if (isFull)
+        {
+            return userCode;
+        }
+
+        // Wrap snippet
+        return@"
+        using System;
+
+        public class Program {
+        " + IndentLines(userCode.Trim(), "    ") + @"
+
+        public static void Main() {
+        var game = new Program();
+        Console.WriteLine(game.StartGame());
+        }
+    }";
+    }
+
+    private string IndentLines(string input, string indent)
+    {
+        var lines = input.Split(new[] { "\r\n", "\r", "\n" }, System.StringSplitOptions.None);
+        for (int i = 0; i < lines.Length; i++)
+        {
+            lines[i] = indent + lines[i];
+        }
+        return string.Join("\n", lines);
     }
 
     IEnumerator RunCode(string code)
@@ -46,27 +98,32 @@ public class CodeRunner : MonoBehaviour
         {
             JDoodleResponse response = JsonUtility.FromJson<JDoodleResponse>(request.downloadHandler.text);
             outputText.text = response.output;
-            if (!string.IsNullOrEmpty(response.output) &&
-           !response.output.ToLower().Contains("exception") &&
-           !response.output.ToLower().Contains("error"))
+            CodePuzzle activePuzzle = codePuzzles[currentPuzzleIndex];
+            bool hasNoError = !string.IsNullOrEmpty(response.output) &&
+                              !response.output.ToLower().Contains("exception") &&
+                              !response.output.ToLower().Contains("error");
+
+            bool isLogicallyCorrect = string.IsNullOrEmpty(activePuzzle.expectedOutput) ||
+                                      response.output.Trim() == activePuzzle.expectedOutput.Trim();
+
+            if (hasNoError && isLogicallyCorrect)
             {
-                Debug.Log("Execution Successful!");
-                PuzzleEvents.Instance.OnCodeSuccess.InvokeEvent(); // Trigger success event
+                Debug.Log("Execution Successful and Logically Correct!");
+                PuzzleEvents.Instance.OnCodeSuccess.InvokeEvent();
             }
             else
             {
                 codeInputField.interactable = true;
-                Debug.Log("Code executed with error: " + response.output);
+                Debug.Log("Code executed with logical or syntax error: " + response.output);
                 PuzzleEvents.Instance.OnCodeFailure.InvokeEvent();
-                // Optionally trigger OnCodeFailure event
             }
 
-            Debug.Log("Success" + outputText.text);
+            Debug.Log("Final Output:\n" + outputText.text);
         }
         else
         {
             outputText.text = "Error: " + request.error;
-            Debug.Log("@@@@" + outputText.text);
+            Debug.Log("HTTP Error: " + outputText.text);
         }
     }
 
@@ -89,3 +146,4 @@ public class CodeRunner : MonoBehaviour
         public string cpuTime;
     }
 }
+   

@@ -10,9 +10,9 @@ public class CodePuzzle : ScriptableObject
     [TextArea(5, 15)]
     public string codeWithBug; // This is what appears in the InputField
 
-    /*[TextArea(5, 15)]
-    public string correctCode; // Optional: use to check if user fixes it correctly*/
+    [TextArea(5, 15)]
+    public string expectedOutput; // Optional: use to check if user fixes it correctly
 
-    public string description; // Optional: UI display or hint
+    //public string description; // Optional: UI display or hint
     public int difficulty; // Use thi
 }
