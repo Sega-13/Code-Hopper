@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ec532cf7fcbec479169476e6944d69, type: 3}
+  m_Name: CodePuzzle32
+  m_EditorClassIdentifier: 
+  puzzleName: Level-8-puzzle-4
+  codeWithBug: "using System;\r\n\r\nnamespace DelegateExample\r\n{\r\n    // Define
+    the delegate type\r\n    public delegate int MathOp();\r\n\r\n    class Program\r\n   
+    {\r\n        // Method matching the delegate signature\r\n        static int
+    Add(int a, int b)\r\n        {\r\n            return a + b;\r\n        }\r\n\r\n       
+    static void Main(string[] args)\r\n        {\r\n            // Assign the Add
+    method to the delegate\r\n            MathOp op = Add;\r\n\r\n            //
+    Call the delegate\r\n            int result = op(5, 3);\r\n\r\n            //
+    Output the result\r\n            Console.WriteLine(\"Result: \" + result);\r\n       
+    }\r\n    }\r\n}"
+  expectedOutput: 'Result: 8'
+  difficulty: 7

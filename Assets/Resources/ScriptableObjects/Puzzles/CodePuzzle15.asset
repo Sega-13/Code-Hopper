@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ec532cf7fcbec479169476e6944d69, type: 3}
+  m_Name: CodePuzzle15
+  m_EditorClassIdentifier: 
+  puzzleName: Level-5-puzzle-5
+  codeWithBug: "using System;\r\n\t\t\t\t\t\r\n\tpublic class Program\r\n\t{\r\n\t\tpublic
+    static void Main()\r\n\t\t{\n\t\t\tint[] nums = {1, 2, 3, 2, 4, 1};\r\n\t\t\tint
+    duplicates = 0;\r\n\r\n\t\t\tfor (int i = 0; i < nums.Length; i++)\r\n\t\t\t{\r\n   
+    \t\t\t\tfor (int j = i + 1; j < nums.Length; j++)\r\n    \t\t\t\t{\r\n      
+    \t\t\t\t\t if (nums[i] == nums[j])\r\n            \t\t\t\tduplicates++;\r\n   
+    \t\t\t\t}\r\n\t\t\t}\r\n\r\n\t\t\tConsole.WriteLine(\"Duplicates: \" + duplicates);\n\t\t\t\n\t\t}\r\t\n\t}"
+  expectedOutput: 'Duplicates: 3'
+  difficulty: 4

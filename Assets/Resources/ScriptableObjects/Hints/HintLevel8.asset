@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c867f26059990846a376edb54d882d7, type: 3}
+  m_Name: HintLevel8
+  m_EditorClassIdentifier: 
+  levelName: Level-8
+  puzzles:
+  - puzzleId: Level-8-puzzle-1
+    hintSteps:
+    - "Move the delegate declaration outside of the Main method \u2014 it should
+      be at the class level."
+    - Assign a method to greetUser before invoking it.
+    - Define a method that matches the delegate signature (i.e., a method that returns
+      void and takes no parameters).
+  - puzzleId: Level-8-puzzle-2
+    hintSteps:
+    - "Move the delegate definition and DoSomething method outside of Main \u2014
+      make them members of the class."
+    - "Remove all public modifiers from inside Main; they\u2019re only valid in the
+      class scope."
+    - ' Assign the method DoSomething to the delegate onAction, and then call it.'
+  - puzzleId: Level-8-puzzle-3
+    hintSteps:
+    - ' Do not overwrite the delegate if you want to keep all the subscribed methods.'
+    - "If your goal is to invoke both LogToFile and LogToConsole, just use += to
+      add them and don\u2019t reassign."
+    - "Use log?.Invoke() instead of log() for safer invocation in real-world code
+      \u2014 it checks for null before calling."
+  - puzzleId: Level-8-puzzle-4
+    hintSteps:
+    - "Make sure the delegate signature matches the method \u2014 Add takes two int
+      parameters, but the delegate MathOp takes none."
+    - Either update the delegate to accept two int parameters, or modify Add() to
+      take none (and return a constant, for example).
+    - "Check the delegate signature first when assigning any method \u2014 both parameters
+      and return types must match exactly."
+  - puzzleId: Level-8-puzzle-5
+    hintSteps:
+    - "Check the delegate signature \u2014 it returns string, so the method assigned
+      to it must return string too."
+    - 'Match the method return type to the delegate: the method must be string ConcatStrings(...),
+      not int.'
+    - Your return statement is fine, it just needs the return type to match (string).
+  - puzzleId: Level-8-puzzle-6
+    hintSteps:
+    - " Remove or correct the misleading comment \u2014 the delegate is correctly
+      invoking both NotifyUser and NotifyAdmin."
+    - "Understand how multicast delegates work \u2014 using += adds multiple methods,
+      and they are all invoked in order."
+    - "Ensure no exceptions in any method \u2014 if one method in the delegate list
+      throws an exception, later ones won\u2019t run.\n\n"
+  - puzzleId: Level-8-puzzle-7
+    hintSteps:
+    - 'Use an expression-bodied lambda: For single expressions, you can drop the
+      braces and just return the result directly.'
+    - If using braces, you must include a return statement and a semicolon.
+    - 'Match the delegate return type: The delegate returns an int, so your lambda
+      must return an int.'
+  - puzzleId: Level-8-puzzle-8
+    hintSteps:
+    - "Match the parameter type: Ensure the delegate and the method both use the
+      same type \u2014 either both use int or both use string."
+    - 'Match the argument: The argument passed to the delegate must match its expected
+      parameter type.'
+    - 'Don''t change only one thing: Either change both the delegate and method to
+      use string, or change the passed argument to an int.
+
+
+'

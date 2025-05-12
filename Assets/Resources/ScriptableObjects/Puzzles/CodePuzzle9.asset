@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ec532cf7fcbec479169476e6944d69, type: 3}
+  m_Name: CodePuzzle9
+  m_EditorClassIdentifier: 
+  puzzleName: Level-4-puzzle-3
+  codeWithBug: "using System;\r\n\t\t\t\t\t\r\n\tpublic class Program\r\n\t{\r\n\t\tpublic
+    static void Main()\r\n\t\t{\n\t\t\tint a = 5;\r\n \t\t\tint b = 10;\r\t\t\t\n\t\t\tConsole.WriteLine(\"Sum:
+    \"  a - b);\n\t\t}\r\t\n\t}"
+  expectedOutput: -5
+  difficulty: 3

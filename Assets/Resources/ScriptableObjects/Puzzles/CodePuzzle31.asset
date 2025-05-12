@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ec532cf7fcbec479169476e6944d69, type: 3}
+  m_Name: CodePuzzle31
+  m_EditorClassIdentifier: 
+  puzzleName: Level-8-puzzle-3
+  codeWithBug: "using System;\r\n\r\nnamespace DelegateExample\r\n{\r\n    // Define
+    the delegate type\r\n    public delegate void Logger();\r\n\r\n    class Program\r\n   
+    {\r\n        // Methods matching the delegate signature\r\n        static void
+    LogToFile()\r\n        {\r\n            Console.WriteLine(\"File\");\r\n       
+    }\r\n\r\n        static void LogToConsole()\r\n        {\r\n            Console.WriteLine(\"Console\");\r\n       
+    }\r\n\r\n        static void Main(string[] args)\r\n        {\r\n           
+    Logger log = null;\r\n\r\n            // Adding methods to the delegate\r\n           
+    log += LogToFile;\r\n            log += LogToConsole;\r\n\r\n            // Now
+    log points to both methods, but we overwrite it\r\n            log = LogToConsole;\r\n\r\n           
+    // Invoke the delegate\r\n            log();\r\n        }\r\n    }\r\n}"
+  expectedOutput: 'File
+
+    Console
+
+    Console'
+  difficulty: 7

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ec532cf7fcbec479169476e6944d69, type: 3}
+  m_Name: CodePuzzle23
+  m_EditorClassIdentifier: 
+  puzzleName: Level-7-puzzle-2
+  codeWithBug: "using System;\r\n\t\t\t\t\t\r\n\tpublic class Program\r\n\t{\r\n\t\tpublic
+    static void Main()\r\n\t\t{\n\t\t\tCar c = new Vehicle();\n\t\t}\r\t\n\t}\n\tpublic
+    class Vehicle\r\n\t{\r\t\n    \t\tprivate void StartEngine()\r\n    \t\t{\r\n       
+    \t\t\tConsole.WriteLine(\"Engine started\");\r\n \t \t  }\r\n\t}\r\t\n\r\n\tpublic
+    class Car : Vehicle\r\n\t{\t  \t\t\n    \t\tpublic void Drive()\r\n \t   \t{\r\n       
+    \t\t\tStartEngine();\r\n    \t\t}\r\t  \t\t\n\t}\r\t\n"
+  expectedOutput: Engine started
+  difficulty: 5

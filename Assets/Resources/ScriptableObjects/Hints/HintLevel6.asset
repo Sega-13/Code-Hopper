@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c867f26059990846a376edb54d882d7, type: 3}
+  m_Name: HintLevel6
+  m_EditorClassIdentifier: 
+  levelName: Level-6
+  puzzles:
+  - puzzleId: Level-6-puzzle-1
+    hintSteps:
+    - Is an instance of the Player class created before accessing player.name
+    - In C#, you can't access non-static members without creating an object. Has
+      player been declared anywhere?
+    - Look for a variable named player. Does it exist, or do you need to create it
+      first using new?
+  - puzzleId: Level-6-puzzle-2
+    hintSteps:
+    - The damage field is marked private. What does that mean for code outside the
+      class trying to access it?
+    - "To allow access to damage from outside the Weapon class, you may need to provide
+      a public \u201Cgate\u201D like a method or property."
+    - Check the access modifier of damage. Can Program.Main see it directly, or do
+      you need a public way to retrieve it?
+  - puzzleId: Level-6-puzzle-3
+    hintSteps:
+    - The Enemy class has a constructor that requires a parameter. Is the new Enemy()
+      call providing one?
+    - "If you define a constructor with parameters, C# won\u2019t automatically create
+      a parameterless one for you."
+    - Check how you're trying to create the Enemy object. Does the constructor call
+      match the constructor definition?
+  - puzzleId: Level-6-puzzle-4
+    hintSteps:
+    - You're calling Speak() on a variable of type Animal, but it's assigned a Dog.
+      Which version of Speak() is actually being used?
+    - In C#, if you want a method in a subclass to override a base class method,
+      you need to use the virtual and override keywords. Are those present?
+    - "Without override, the subclass method hides the base class method, but doesn\u2019t
+      override it. That\u2019s why \"Animal sound\" is printed instead of \"Bark\"."
+  - puzzleId: Level-6-puzzle-5
+    hintSteps:
+    - The score field is marked static. What does that mean about how it should be
+      accessed?
+    - Are you creating an instance of GameManager just to modify a value that belongs
+      to the class itself, not the instance?
+    - Static members belong to the class, not the object. Can you access score using
+      the class name instead of gm?
+  - puzzleId: Level-6-puzzle-6
+    hintSteps:
+    - The class Shape is marked abstract. Can you directly create an instance of
+      an abstract class?
+    - "Abstract classes are like blueprints\u2014they require a subclass to provide
+      specific implementations before use."
+    - To use Shape, try creating a subclass that implements the Draw() method, and
+      instantiate that instead.

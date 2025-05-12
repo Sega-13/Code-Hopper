@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ec532cf7fcbec479169476e6944d69, type: 3}
+  m_Name: CodePuzzle22
+  m_EditorClassIdentifier: 
+  puzzleName: Level-7-puzzle-1
+  codeWithBug: "using System;\r\n\r\npublic class Potion\r\n{\r\n    string type;\r\n\r\n   
+    public Potion(string type)\r\n    {\r\n          type = type;\r\n    }\r\n\r\n   
+    public void PrintType() => Console.WriteLine(type);\r\n}\r\n\r\npublic class
+    Program\r\n{\r\n    public static void Main()\r\n    {\r\n        Potion p =
+    new Potion(\"Health\");\r\n        p.PrintType();\r\n    }\r\n}"
+  expectedOutput: Health
+  difficulty: 5

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c867f26059990846a376edb54d882d7, type: 3}
+  m_Name: HintLevel4
+  m_EditorClassIdentifier: 
+  levelName: Level-4
+  puzzles:
+  - puzzleId: Level-4-puzzle-1
+    hintSteps:
+    - Check with loop conditions.
+    - Loop contains three parts Initilization, condition check and incremntal or
+      decrement condtions.
+    - Add incremental condition.
+  - puzzleId: Level-4-puzzle-2
+    hintSteps:
+    - "You're mixing string concatenation and subtraction in the same Console.WriteLine
+      statement. C# evaluates from left to right\u2014how might that affect the result?"
+    - "When you do \"Sum: \" + a, it's a string. Then you try to subtract b from
+      a string\u2014C# doesn't allow that."
+    - 'Wrap the math in parentheses first, then concatenate: Console.WriteLine("Sum:
+      " + (a + b));.'
+  - puzzleId: Level-4-puzzle-3
+    hintSteps:
+    - 'You''re trying to output a string and some math, but there''s a missing operator
+      between "Sum: " and a.'
+    - ' In C#, to combine text with numbers, use + like this: "Sum: " + a.'
+    - If you're trying to show the result of a - b, wrap that operation in parentheses.
+  - puzzleId: Level-4-puzzle-4
+    hintSteps:
+    - Swaping values incorrectly.
+    - use one more variable to swap correctly.

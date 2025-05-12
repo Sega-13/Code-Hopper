@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c867f26059990846a376edb54d882d7, type: 3}
+  m_Name: HintLevel7
+  m_EditorClassIdentifier: 
+  levelName: Level-7
+  puzzles:
+  - puzzleId: Level-7-puzzle-1
+    hintSteps:
+    - "The constructor has a parameter named type, but there\u2019s also a field
+      named type. Are you assigning the value to the correct one?"
+    - ' In type = type;, both sides refer to the parameter. How can you refer to
+      the instance variable instead?'
+    - Use the this keyword when you want to refer to the current object's field,
+      like this.type = type;.
+  - puzzleId: Level-7-puzzle-2
+    hintSteps:
+    - you're trying to assign a Vehicle object to a Car variable. Is that allowed
+      in inheritance?
+    - ' The StartEngine method is marked private in Vehicle. Can Car access it directly?'
+    - 'To allow derived classes like Car to use StartEngine, consider changing its
+      access modifier. Is private the right choice here?
+
+
+'
+  - puzzleId: Level-7-puzzle-3
+    hintSteps:
+    - "The method Multiply(int a, double b) exists\u2014but you\u2019re calling it
+      with 2.0 (a double) and 3 (an int). Does that match exactly?"
+    - C# method overload resolution is sensitive to argument order and types. If
+      you pass double, int, will it match either method exactly?
+    - Try reversing the parameter types in the method or cast the arguments to ensure
+      a perfect match. Otherwise, the compiler may get confused or throw an error.
+  - puzzleId: Level-7-puzzle-4
+    hintSteps:
+    - "You're calling a static method (AddPoints)\u2014but it's trying to access
+      a score variable. Is score also static?"
+    - In C#, static methods can only access other static members. Does score meet
+      that requirement?
+    - Decide whether score should track points globally (make it static) or per-instance
+      (change how AddPoints is called).
+  - puzzleId: Level-7-puzzle-5
+    hintSteps:
+    - "The line Day {} is incomplete. What kind of type are you trying to define
+      here\u2014class, struct, or enum?"
+    - You're using Day.Monday. Does Day need to be an enum to support that kind of
+      syntax?
+    - Make sure you define Day as an enum with named values like Monday, Tuesday,
+      etc., so the assignment works correctly.
+  - puzzleId: Level-7-puzzle-6
+    hintSteps:
+    - You're trying to assign an int to a variable of type Difficulty. Are they the
+      same type, even if the values match?
+    - An explicit cast is needed when converting from an int to an enum. C# doesn't
+      allow implicit conversion here.
+    - Use syntax like (Difficulty)level to tell the compiler you know what you're
+      doing and want to convert the number into an enum value.
+  - puzzleId: Level-7-puzzle-7
+    hintSteps:
+    - "You\u2019re using a Queue<string> and calling Dequeue() multiple times. How
+      many items are actually in the queue before the first Dequeue()?"
+    - Dequeue() removes and returns the first item. What happens if you try to dequeue
+      more items than the queue contains?
+    - To avoid exceptions, check if the queue is empty using Count or Any() before
+      calling Dequeue().
