@@ -38,13 +38,7 @@ public class CollectManager : MonoBehaviour
         
         
         UpdateUI();
-       /* if (Instance == null)
-        {
-            Instance = this;
-           // DontDestroyOnLoad(gameObject); // Persist across scenes
-            LoadData();
-        }
-        else Destroy(gameObject);*/
+       
     }
 
     private void Start()
@@ -70,7 +64,7 @@ public class CollectManager : MonoBehaviour
     public void GrantReward(string rewardName)
     {
         Debug.Log("Reward Granted: " + rewardName);
-        // Unlock feature, open portal, give item, etc.
+       
     }
     public void RemoveCoin(int amount)
     {
@@ -111,7 +105,6 @@ public class CollectManager : MonoBehaviour
         if (coinCount >= 10)
         {
             feedbackText.gameObject.SetActive(true);
-            //hintUIController.OnShowNextHint();
             bool shown = hintUIController.OnShowNextHint();
             if (shown)
             {
@@ -130,7 +123,7 @@ public class CollectManager : MonoBehaviour
         feedbackText.text = msg;
         feedbackText.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(2f); // Show message for 2 seconds
+        yield return new WaitForSeconds(2f); 
 
         feedbackText.gameObject.SetActive(false);
     }

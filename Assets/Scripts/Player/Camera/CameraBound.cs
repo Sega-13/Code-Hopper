@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraBound : MonoBehaviour
 {
-    public Transform player;  // Assign the Player in Inspector
-    public BoxCollider2D cameraBounds; // Assign a BoxCollider2D defining the vertical range
+    public Transform player;  
+    public BoxCollider2D cameraBounds; 
     public float smoothSpeed = 5f; // Smooth movement speed
 
     private Camera cam;

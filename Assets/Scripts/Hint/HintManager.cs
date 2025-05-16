@@ -10,9 +10,8 @@ public class HintManager : MonoBehaviour
 {
 
     public List<HintData> allHints;
-    //public TextMeshProUGUI hintTextUI;
-    //public GameObject hintPanel;
-      private PuzzleHint currentPuzzleHint;
+    
+    private PuzzleHint currentPuzzleHint;
 
    
     private Dictionary<string, int> hintIndices = new Dictionary<string, int>();
@@ -97,42 +96,6 @@ public class HintManager : MonoBehaviour
         }
     }
 
-
-
-
-
-   /* public bool ShowNextHint()
-    {
-        if (currentPuzzleHint == null || currentPuzzleHint.hintSteps == null || currentPuzzleHint.hintSteps.Length == 0)
-        {
-            hintTextUI.text = "No hint available for this puzzle.";
-            hintPanel.SetActive(true);
-            return false;
-        }
-        string puzzleId = currentPuzzleHint.puzzleId;
-        if (!hintIndices.ContainsKey(puzzleId))
-            hintIndices[puzzleId] = 0;
-
-        int currentHintIndex = hintIndices[puzzleId];
-
-        if (currentHintIndex < currentPuzzleHint.hintSteps.Length)
-        {
-            string hint = currentPuzzleHint.hintSteps[currentHintIndex];
-            hintTextUI.text = hint;
-            hintPanel.SetActive(true);
-            currentHintIndex++;
-            hintIndices[puzzleId] = currentHintIndex ;
-            return true;
-        }
-        else
-        {
-            hintTextUI.text = "No more hints!";
-            hintPanel.SetActive(true);
-            Debug.Log("All hints shown for this puzzle.");
-            return false;
-        }
-    }*/
-    
     public bool HasMoreHints()
     {
         if (currentPuzzleHint == null) return false;
@@ -141,8 +104,6 @@ public class HintManager : MonoBehaviour
         int index = hintIndices.ContainsKey(puzzleId) ? hintIndices[puzzleId] : 0;
 
         return index < currentPuzzleHint.hintSteps.Length;
-       // return currentPuzzleHint != null && currentHintIndex < currentPuzzleHint.hintSteps.Length;
-       // return allHintsToShow != null && currentHintIndex < allHintsToShow.Count;
     }
     public void ResetHints(string puzzleId)
     {
@@ -150,9 +111,4 @@ public class HintManager : MonoBehaviour
             hintIndices[puzzleId] = 0;
     }
 
- /*   public void CloseHintPanel()
-    {
-        hintTextUI.gameObject.SetActive(false);
-        hintPanel.SetActive(false);
-    }*/
 }

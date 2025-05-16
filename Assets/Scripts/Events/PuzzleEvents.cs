@@ -19,9 +19,11 @@ public class PuzzleEvents
        
     public EventController OnCodeSuccess { get; private set; }
     public EventController OnCodeFailure { get; private set; }
+    public EventController<bool> OnPuzzleCompleted { get; private set; }
     PuzzleEvents()
     {
         OnCodeSuccess = new EventController();
         OnCodeFailure = new EventController();
+        OnPuzzleCompleted = new EventController<bool> ();
     }
 }

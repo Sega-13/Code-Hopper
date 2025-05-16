@@ -14,21 +14,13 @@ public class LevelComplete : MonoBehaviour, ILevelObserver
     [SerializeField] private TextMeshProUGUI crystalText;
     [SerializeField] private CollectManager collectManager;
 
-   
-    private void Start()
-    {
-       /* if (coinText != null)  coinText.text = collectManager.coinCount.ToString();
-        if(crystalText != null) crystalText.text = collectManager.crystalCount.ToString();*/
-    }
     private void OnEnable()
     {
-        // Register this class as an observer to listen for level completion events
         LevelManager.Instance.RegisterObserver(this);
     }
 
     private void OnDisable()
     {
-        // Unregister the observer when this object is disabled
         LevelManager.Instance.UnregisterObserver(this);
     }
     public void ExitGame()

@@ -90,20 +90,14 @@ public class LevelManager : MonoBehaviour
     public void ReloadLevel()
     {
         levelTransitionManager.ReloadCurrentLevel();
-        /*Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);*/
     }
   
     public void Exit()
     {
         levelTransitionManager.ExitGame();
-        /*SceneManager.LoadScene(0);
-        Application.Quit();
-        Debug.Log("Game Exited");*/
     }
     public void LoadNextScene()
     {
         levelTransitionManager.LoadNextScene();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

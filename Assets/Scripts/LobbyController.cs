@@ -6,11 +6,7 @@ public class LobbyController : MonoBehaviour
 {
     [SerializeField] private GameObject LevelSelectPanel;
     [SerializeField] private GameObject GameMenu;
-    void Start()
-    {
-        
-    }
-
+   
     public void Play()
     {
         LevelSelectPanel.SetActive(true);

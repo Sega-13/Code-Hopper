@@ -13,6 +13,5 @@ public class CodePuzzle : ScriptableObject
     [TextArea(5, 15)]
     public string expectedOutput; // Optional: use to check if user fixes it correctly
 
-    //public string description; // Optional: UI display or hint
-    public int difficulty; // Use thi
+    public int difficulty; 
 }

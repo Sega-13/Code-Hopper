@@ -6,9 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewHint", menuName = "Hints/ProgressiveHintData")]
 public class HintData : ScriptableObject
 {
-    public string levelName;       // Must match scene name
+    public string levelName;       
     public PuzzleHint[] puzzles;
-   // [TextArea] public string[] hintSteps; // Progressive hints
 }
 [Serializable]
 public class PuzzleHint

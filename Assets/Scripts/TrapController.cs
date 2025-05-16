@@ -12,16 +12,14 @@ public class TrapController : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<PlayerMovement>() != null)
         {
-            Debug.Log("Collided");
             CodeBlock.SetActive(true);
             CodePuzzleManager manager = FindObjectOfType<CodePuzzleManager>();
             if (manager != null )
             {
-                manager.LoadPuzzle(puzzleIndex); // Call LoadPuzzle here
+                manager.LoadPuzzle(puzzleIndex); 
                 hintManager.SetCurrentPuzzle(puzzleId);
                 hintManager.ResetHints(puzzleId);
                 puzzleIndex++;
-                Debug.Log("@@@@@@@"+puzzleIndex);
             }
 
         }

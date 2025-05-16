@@ -10,13 +10,11 @@ public class LevelCompleteController : MonoBehaviour,ILevelObserver
 
     private void OnEnable()
     {
-        // Register as an observer when the controller is enabled
         LevelManager.Instance.RegisterObserver(this);
     }
 
     private void OnDisable()
     {
-        // Unregister the observer when the controller is disabled
         LevelManager.Instance.UnregisterObserver(this);
     }
     public void OnTriggerEnter2D(Collider2D collision)
@@ -24,8 +22,6 @@ public class LevelCompleteController : MonoBehaviour,ILevelObserver
         if (collision.gameObject.GetComponent<PlayerMovement>() != null)
         {
             LevelManager.Instance.MarkCurrentLevelComplete();
-            //collectManager.SaveData();
-            //CompleteLevel();
         }
     }
 
