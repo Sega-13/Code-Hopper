@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isCollided;
     private int maxJumpCount = 2;
     private int jumpCount = 0;
+    private IMovementStrategy movementStrategy;
+    private IJumpStrategy jumpStrategy;
+
 
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] private float moveSpeed = 5f;
@@ -33,6 +36,9 @@ public class PlayerMovement : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         playerSprite = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<BoxCollider2D>();
+
+        movementStrategy = new WalkMovement();   
+        jumpStrategy = new DoubleJump();
     }
 
     void Update()
@@ -40,24 +46,19 @@ public class PlayerMovement : MonoBehaviour
         PlayerHorizontalMovement();
         UpdateAnimationState();
     }
+    private void FixedUpdate()
+    {
+        CheckGrounded();
+    }
     private void PlayerHorizontalMovement()
     {
         dirX = joystick.Horizontal;
-        playerRB.velocity = new Vector2(dirX * moveSpeed, playerRB.velocity.y);
-
-       /* dirX = Input.GetAxisRaw("Horizontal");
-        playerRB.velocity = new Vector2(dirX * moveSpeed, playerRB.velocity.y);
-        if (Input.GetButtonDown("Jump"))
-        {
-            PlayerJump();
-        }*/
+        movementStrategy.Move(playerRB,dirX,moveSpeed);
+       // playerRB.velocity = new Vector2(dirX * moveSpeed, playerRB.velocity.y);
     }
     public void PlayerJump()
     {
-        if (jumpCount < maxJumpCount)
-        {
-            playerRB.velocity = new Vector2(playerRB.velocity.x,jumpForce);
-        }
+        jumpStrategy.Jump(playerRB, ref jumpCount, maxJumpCount, jumpForce);
     }
     private void  CheckGrounded()
     {
@@ -70,34 +71,44 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateAnimationState()
     {
         MovementState state;
+
+        // Early return for vertical movement (highest priority)
+        if (playerRB.velocity.y > 0.1f)
+        {
+            state = MovementState.JUMP;
+            playerAnim.SetInteger("state", (int)state);
+            return;
+        }
+
+        if (playerRB.velocity.y < -0.1f)
+        {
+            state = MovementState.FALL;
+            playerAnim.SetInteger("state", (int)state);
+            return;
+        }
+
+        // Horizontal movement
         if (dirX > 0f)
         {
             state = MovementState.RUN;
             playerSprite.flipX = true;
+            playerAnim.SetInteger("state", (int)state);
+            return;
         }
-        else if (dirX < 0f)
+
+        if (dirX < 0f)
         {
             state = MovementState.RUN;
             playerSprite.flipX = false;
+            playerAnim.SetInteger("state", (int)state);
+            return;
         }
-        else
-        {
-            state = MovementState.IDLE;
-        }
-        if (playerRB.velocity.y > 0.1f)
-        {
-            state = MovementState.JUMP;
-        }
-        else if (playerRB.velocity.y < -0.1f)
-        {
-            state = MovementState.FALL;
-        }
-        if(isCollided)
-        {
-            state = MovementState.HIT;
-            isCollided = false;
-        }
+
+        // Default to idle
+        state = MovementState.IDLE;
         playerAnim.SetInteger("state", (int)state);
+    
+    
     }
 
     

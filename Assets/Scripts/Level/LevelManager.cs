@@ -10,7 +10,10 @@ public class LevelManager : MonoBehaviour
     private static LevelManager instance;
     public static LevelManager Instance { get { return instance; } }
     public string[] Levels;
-
+    private event Action<string> LevelCompletedEvent;
+    private LevelProgressManager levelProgressManager;
+    private LevelTransitionManager levelTransitionManager;
+    private List<ILevelObserver> observers = new List<ILevelObserver>();
     private void Awake()
     {
         if (instance == null)
@@ -22,7 +25,10 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        levelProgressManager = new LevelProgressManager();
+        levelTransitionManager = new LevelTransitionManager();
 
+        levelProgressManager.Initialize(Levels);
     }
     
     private void Start()
@@ -30,6 +36,29 @@ public class LevelManager : MonoBehaviour
         if (GetLevelStatus(Levels[0]) == LevelStatus.Locked)
         {
             SetLevelStatus(Levels[0], LevelStatus.UnLocked);
+        }
+    }
+
+    public void RegisterObserver(ILevelObserver observer)
+    {
+        if (!observers.Contains(observer))
+        {
+            observers.Add(observer);
+        }
+    }
+    public void UnregisterObserver(ILevelObserver observer)
+    {
+        if (observers.Contains(observer))
+        {
+            observers.Remove(observer);
+        }
+    }
+    public void NotifyObservers(string levelName)
+    {
+        var observersCopy = new List<ILevelObserver>(observers);
+        foreach (var observer in observersCopy)
+        {
+            observer.OnLevelCompleted(levelName);
         }
     }
     public void MarkCurrentLevelComplete()
@@ -44,6 +73,7 @@ public class LevelManager : MonoBehaviour
         {
             SetLevelStatus(Levels[nextSceneIndex], LevelStatus.UnLocked);
         }
+        NotifyObservers(currentScene.name);
     }
 
     public LevelStatus GetLevelStatus(string level)
@@ -59,20 +89,21 @@ public class LevelManager : MonoBehaviour
     }
     public void ReloadLevel()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
-       /* collectManager.LoadData();
-        collectManager.UpdateUI();*/
+        levelTransitionManager.ReloadCurrentLevel();
+        /*Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);*/
     }
   
     public void Exit()
     {
-        SceneManager.LoadScene(0);
+        levelTransitionManager.ExitGame();
+        /*SceneManager.LoadScene(0);
         Application.Quit();
-        Debug.Log("Game Exited");
+        Debug.Log("Game Exited");*/
     }
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        levelTransitionManager.LoadNextScene();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

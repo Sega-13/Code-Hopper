@@ -8,7 +8,7 @@ public class CollectManager : MonoBehaviour
 {
     [SerializeField] private HintManager hintManager;
     [SerializeField] private TextMeshProUGUI feedbackText;
-   // public static CollectManager Instance;
+    [SerializeField] private HintUIController hintUIController;
 
   
     public TextMeshProUGUI crystalText;
@@ -111,7 +111,8 @@ public class CollectManager : MonoBehaviour
         if (coinCount >= 10)
         {
             feedbackText.gameObject.SetActive(true);
-            bool shown = hintManager.ShowNextHint();
+            //hintUIController.OnShowNextHint();
+            bool shown = hintUIController.OnShowNextHint();
             if (shown)
             {
                 coinCount -= 10; // Deduct coins per hint reveal

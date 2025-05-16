@@ -11,7 +11,7 @@ public class LevelOver : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<PlayerMovement>() != null)
         {
-            //Die();
+            Die();
             LevelOverScreen.gameObject.SetActive(true);
         }
 

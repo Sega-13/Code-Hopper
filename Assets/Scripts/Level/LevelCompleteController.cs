@@ -3,17 +3,29 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class LevelCompleteController : MonoBehaviour
+public class LevelCompleteController : MonoBehaviour,ILevelObserver
 {
     [SerializeField] private LevelComplete levelComplete;
     [SerializeField] private CollectManager collectManager;
 
+    private void OnEnable()
+    {
+        // Register as an observer when the controller is enabled
+        LevelManager.Instance.RegisterObserver(this);
+    }
+
+    private void OnDisable()
+    {
+        // Unregister the observer when the controller is disabled
+        LevelManager.Instance.UnregisterObserver(this);
+    }
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<PlayerMovement>() != null)
         {
-            collectManager.SaveData();
-            CompleteLevel();
+            LevelManager.Instance.MarkCurrentLevelComplete();
+            //collectManager.SaveData();
+            //CompleteLevel();
         }
     }
 
@@ -22,5 +34,11 @@ public class LevelCompleteController : MonoBehaviour
         LevelManager.Instance.MarkCurrentLevelComplete();
         levelComplete.gameObject.SetActive(true);
 
+    }
+
+    void ILevelObserver.OnLevelCompleted(string levelName)
+    {
+        collectManager.SaveData();
+        levelComplete.gameObject.SetActive(true);
     }
 }

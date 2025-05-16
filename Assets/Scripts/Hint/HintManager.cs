@@ -10,16 +10,38 @@ public class HintManager : MonoBehaviour
 {
 
     public List<HintData> allHints;
-    public TextMeshProUGUI hintTextUI;
-    public GameObject hintPanel;
-    private PuzzleHint currentPuzzleHint;
+    //public TextMeshProUGUI hintTextUI;
+    //public GameObject hintPanel;
+      private PuzzleHint currentPuzzleHint;
 
    
     private Dictionary<string, int> hintIndices = new Dictionary<string, int>();
-    private int currentHintIndex = 0;
     private void Start()
     {
         InitializeHintIndicesForCurrentLevel();
+    }
+    public bool TryGetNextHint(out string hint)
+    {
+        hint = null;
+        if (currentPuzzleHint == null || currentPuzzleHint.hintSteps == null || currentPuzzleHint.hintSteps.Length == 0)
+        {
+            return false;
+        }
+
+        string puzzleId = currentPuzzleHint.puzzleId;
+        if (!hintIndices.ContainsKey(puzzleId))
+            hintIndices[puzzleId] = 0;
+
+        int index = hintIndices[puzzleId];
+
+        if (index < currentPuzzleHint.hintSteps.Length)
+        {
+            hint = currentPuzzleHint.hintSteps[index];
+            hintIndices[puzzleId] = index + 1;
+            return true;
+        }
+
+        return false;
     }
     public void InitializeHintIndicesForCurrentLevel()
     {
@@ -79,7 +101,7 @@ public class HintManager : MonoBehaviour
 
 
 
-    public bool ShowNextHint()
+   /* public bool ShowNextHint()
     {
         if (currentPuzzleHint == null || currentPuzzleHint.hintSteps == null || currentPuzzleHint.hintSteps.Length == 0)
         {
@@ -109,7 +131,7 @@ public class HintManager : MonoBehaviour
             Debug.Log("All hints shown for this puzzle.");
             return false;
         }
-    }
+    }*/
     
     public bool HasMoreHints()
     {
@@ -128,9 +150,9 @@ public class HintManager : MonoBehaviour
             hintIndices[puzzleId] = 0;
     }
 
-    public void CloseHintPanel()
+ /*   public void CloseHintPanel()
     {
         hintTextUI.gameObject.SetActive(false);
         hintPanel.SetActive(false);
-    }
+    }*/
 }

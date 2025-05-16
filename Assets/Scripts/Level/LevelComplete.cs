@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelComplete : MonoBehaviour
+public class LevelComplete : MonoBehaviour, ILevelObserver
 {
     [SerializeField] private Button buttonNext;
     [SerializeField] private Button buttonRestart;
@@ -17,8 +17,19 @@ public class LevelComplete : MonoBehaviour
    
     private void Start()
     {
-        if (coinText != null)  coinText.text = collectManager.coinCount.ToString();
-        if(crystalText != null) crystalText.text = collectManager.crystalCount.ToString();
+       /* if (coinText != null)  coinText.text = collectManager.coinCount.ToString();
+        if(crystalText != null) crystalText.text = collectManager.crystalCount.ToString();*/
+    }
+    private void OnEnable()
+    {
+        // Register this class as an observer to listen for level completion events
+        LevelManager.Instance.RegisterObserver(this);
+    }
+
+    private void OnDisable()
+    {
+        // Unregister the observer when this object is disabled
+        LevelManager.Instance.UnregisterObserver(this);
     }
     public void ExitGame()
     {
@@ -32,5 +43,11 @@ public class LevelComplete : MonoBehaviour
     public void NextLevel()
     {
         LevelManager.Instance.LoadNextScene();
+    }
+
+    void ILevelObserver.OnLevelCompleted(string levelName)
+    {
+        if (coinText != null) coinText.text = collectManager.coinCount.ToString();
+        if (crystalText != null) crystalText.text = collectManager.crystalCount.ToString();
     }
 }

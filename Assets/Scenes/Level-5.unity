@@ -10295,6 +10295,7 @@ GameObject:
   - component: {fileID: 925656996}
   - component: {fileID: 925656995}
   - component: {fileID: 925656998}
+  - component: {fileID: 925656999}
   m_Layer: 5
   m_Name: HintButton
   m_TagString: Untagged
@@ -10431,9 +10432,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allHints:
-  - {fileID: 11400000, guid: 5cec2761f8d2cdd48b2a5db12ac57228, type: 2}
+  - {fileID: 11400000, guid: 30c6e081fec9ced4dbf44e6dac088d6f, type: 2}
+--- !u!114 &925656999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925656993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f94d29d335dfa4e9f72c9a176685ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   hintTextUI: {fileID: 206730425}
   hintPanel: {fileID: 1921066835}
+  hintManager: {fileID: 925656998}
 --- !u!1001 &940625470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11814,6 +11828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintManager: {fileID: 925656998}
   feedbackText: {fileID: 206730425}
+  hintUIController: {fileID: 925656999}
   crystalText: {fileID: 591354408}
   coinText: {fileID: 394457398}
 --- !u!4 &1156029504
@@ -16026,9 +16041,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 925656998}
-        m_TargetAssemblyTypeName: HintManager, Assembly-CSharp
-        m_MethodName: CloseHintPanel
+      - m_Target: {fileID: 925656999}
+        m_TargetAssemblyTypeName: HintUIController, Assembly-CSharp
+        m_MethodName: OnCloseHintPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
