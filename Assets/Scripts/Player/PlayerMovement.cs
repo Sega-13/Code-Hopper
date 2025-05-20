@@ -54,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
     {
         dirX = joystick.Horizontal;
         movementStrategy.Move(playerRB,dirX,moveSpeed);
-       // playerRB.velocity = new Vector2(dirX * moveSpeed, playerRB.velocity.y);
     }
     public void PlayerJump()
     {

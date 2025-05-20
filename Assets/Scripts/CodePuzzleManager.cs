@@ -123,6 +123,8 @@ public class CodePuzzleManager : MonoBehaviour
 
     private void OnSuccess()
     {
+        Run.gameObject.SetActive(false);
+        Hint.gameObject.SetActive(false);
         SetState(PuzzleState.Passed);
         PuzzleEvents.Instance.OnPuzzleCompleted?.InvokeEvent(true);
     }

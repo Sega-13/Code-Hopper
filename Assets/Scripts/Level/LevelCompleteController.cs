@@ -36,5 +36,6 @@ public class LevelCompleteController : MonoBehaviour,ILevelObserver
     {
         collectManager.SaveData();
         levelComplete.gameObject.SetActive(true);
+        levelComplete.UpdateUI();
     }
 }

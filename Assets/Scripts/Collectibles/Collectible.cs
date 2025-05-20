@@ -9,7 +9,7 @@ public class Collectible : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<PlayerMovement>() != null) // or your player detection method
+        if (other.GetComponent<PlayerMovement>() != null) 
         {
             ApplyCollectibleEffect();
             PlayCollectFeedback();

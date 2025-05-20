@@ -3654,6 +3654,7 @@ MonoBehaviour:
   buttonNext: {fileID: 453984156}
   buttonRestart: {fileID: 953514009}
   buttonExit: {fileID: 1599060476}
+  pauseButton: {fileID: 2107848057}
   coinText: {fileID: 1475193585}
   crystalText: {fileID: 1195084207}
   collectManager: {fileID: 1156029503}
@@ -9539,6 +9540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e3f509141c36104f95582d1d2c9eb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runButton: {fileID: 881144120}
+  loaderPrefab: {fileID: 2571051552816931385, guid: 91717d0a3ef5f1349a26c1da37f9ab06, type: 3}
   codeInputField: {fileID: 914438867}
   outputText: {fileID: 604243213}
   clientId: fae127ff653c8713fd14da8bf99f67b
@@ -10052,6 +10055,18 @@ PrefabInstance:
     - target: {fileID: 6836863310827241011, guid: 3558094fb203d6a478e4b17646b57eed, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208210642764355114, guid: 3558094fb203d6a478e4b17646b57eed, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208210642764355114, guid: 3558094fb203d6a478e4b17646b57eed, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 7208210642764355114, guid: 3558094fb203d6a478e4b17646b57eed, type: 3}
+      propertyPath: m_Color.a
+      value: 0.37254903
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14512,7 +14527,6 @@ MonoBehaviour:
   Traps:
   - {fileID: 1101044815}
   - {fileID: 522040441}
-  currentPuzzle: {fileID: 11400000, guid: 193152797171e16478398ec8bfbc932f, type: 2}
   codeInputField: {fileID: 914438867}
   puzzleTitleText: {fileID: 382471082}
   result: {fileID: 604243213}
@@ -14851,6 +14865,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5516586336161696709, guid: dbeeb449d7c2c014eb804b55b024b27f, type: 3}
   m_PrefabInstance: {fileID: 2107848055}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2107848057 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4869406397762060791, guid: dbeeb449d7c2c014eb804b55b024b27f, type: 3}
+  m_PrefabInstance: {fileID: 2107848055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2127604654
 GameObject:
   m_ObjectHideFlags: 0

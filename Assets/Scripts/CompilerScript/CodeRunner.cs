@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class CodeRunner : MonoBehaviour
 {
+    [Header("UI Feedback")]
+    [SerializeField] private Button runButton;
+    [SerializeField] private GameObject loaderPrefab;
+    private GameObject activeLoader;
 
     [Header("UI Elements")]
     public TMP_InputField codeInputField;
@@ -15,6 +20,7 @@ public class CodeRunner : MonoBehaviour
     public string clientId = "your_client_id";
     public string clientSecret = "your_client_secret";
 
+
     [Header("Puzzle Data")]
     public List<CodePuzzle> codePuzzles;
     private int currentPuzzleIndex = 0;
@@ -23,6 +29,9 @@ public class CodeRunner : MonoBehaviour
 
     public void OnRunCodeClicked()
     {
+        runButton.interactable = false;
+        activeLoader = Instantiate(loaderPrefab, runButton.transform.parent);
+        activeLoader.transform.SetAsLastSibling();
         string userCode = codeInputField.text;
         string wrappedCode = WrapCodeIfNeeded(userCode); // Wrap user input in a class
         StartCoroutine(RunCode(wrappedCode));
@@ -32,7 +41,9 @@ public class CodeRunner : MonoBehaviour
         if (index >= 0 && index < codePuzzles.Count)
         {
             currentPuzzleIndex = index;
+            Debug.Log("currentPuzzleIndex" + currentPuzzleIndex);
             codeInputField.text = codePuzzles[index].codeWithBug;
+            Debug.Log("!!@ "+codeInputField.text);
         }
         else
         {
@@ -93,7 +104,8 @@ public class CodeRunner : MonoBehaviour
         request.SetRequestHeader("Content-Type", "application/json");
 
         yield return request.SendWebRequest();
-
+        if (activeLoader) activeLoader.GetComponent<UIRotate>().Close();
+        runButton.interactable = true;
         if (request.result == UnityWebRequest.Result.Success)
         {
             JDoodleResponse response = JsonUtility.FromJson<JDoodleResponse>(request.downloadHandler.text);
@@ -106,7 +118,7 @@ public class CodeRunner : MonoBehaviour
             bool isLogicallyCorrect = string.IsNullOrEmpty(activePuzzle.expectedOutput) ||
                                       response.output.Trim() == activePuzzle.expectedOutput.Trim();
 
-            if (hasNoError && isLogicallyCorrect)
+            if (hasNoError || isLogicallyCorrect)
             {
                 Debug.Log("Execution Successful and Logically Correct!");
                 PuzzleEvents.Instance.OnCodeSuccess.InvokeEvent();

@@ -10,6 +10,7 @@ public class LevelComplete : MonoBehaviour, ILevelObserver
     [SerializeField] private Button buttonNext;
     [SerializeField] private Button buttonRestart;
     [SerializeField] private Button buttonExit;
+    [SerializeField] private Button pauseButton;
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextMeshProUGUI crystalText;
     [SerializeField] private CollectManager collectManager;
@@ -39,7 +40,14 @@ public class LevelComplete : MonoBehaviour, ILevelObserver
 
     void ILevelObserver.OnLevelCompleted(string levelName)
     {
+       /* if (coinText != null) coinText.text = collectManager.coinCount.ToString();
+        if (crystalText != null) crystalText.text = collectManager.crystalCount.ToString();
+        pauseButton.gameObject.SetActive(false);*/
+    }
+    public void UpdateUI()
+    {
         if (coinText != null) coinText.text = collectManager.coinCount.ToString();
         if (crystalText != null) crystalText.text = collectManager.crystalCount.ToString();
+        pauseButton.gameObject.SetActive(false);
     }
 }
