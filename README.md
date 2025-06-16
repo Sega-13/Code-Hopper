@@ -1,4 +1,4 @@
-                                                            **# Code-Hopper**
+                                                     **# Code-Hopper**
                                                          Learn Coding with Gaming
                                                          
 A 2D platformer game that contains traps when a Player collides with traps a coding puzzle appears. Player have to solve puzzle to move forward.    
