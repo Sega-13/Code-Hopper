@@ -29,7 +29,10 @@ A 2D platformer game that contains traps when a Player collides with traps a cod
     o	Managers like LevelManager, HintManager, CodePuzzleManager likely function as singletons or central controllers coordinating between systems.    
 
   **Images**    
-   
+    ![](https://github.com/Sega-13/Code-Hopper/blob/main/Images/Screenshot%202025-05-04%20001053.png) 
+    ![](https://github.com/Sega-13/Code-Hopper/blob/main/Images/Screenshot%202025-05-20%20072233.png) 
+    ![](https://github.com/Sega-13/Code-Hopper/blob/main/Images/Screenshot%202025-05-20%20084923.png)
+    ![](https://github.com/Sega-13/Code-Hopper/blob/main/Images/Screenshot%202025-06-07%20161748.png)
   **Video**    
 
     https://github.com/Sega-13/Code-Hopper/blob/main/Images/Recordings/Movie_002.mp4
